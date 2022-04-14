@@ -76,7 +76,7 @@ socket
 
   .on("chat:typing", (data) => {
     if (data) {
-      actions.innerHTML = `<p class="output-text"${data} is typing...</p>`;
+      actions.innerHTML = `<p class="output-text">${data} is typing...</p>`;
       scroll();
     }
   })
