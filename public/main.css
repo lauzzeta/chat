@@ -124,6 +124,22 @@ body{
     word-wrap: break-word;
     line-height: 20px;
 }
+#status{
+    font-family: 'Poppins',sans-serif;
+    margin-right: 1rem;
+    border-radius: 5px;
+    outline: none;
+    padding: .5rem;
+    border: 1px solid gainsboro;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: .25s;
+}
+#status:hover {
+    background-color: rgba(104, 69, 160, 0.61);
+    color: white;
+}
+
 #send {
     font-family: 'Poppins',sans-serif;
     margin-right: 1rem;

@@ -19,13 +19,21 @@ io.on("connection", (socket) => {
     .on("chat:message", (data) => {
       io.sockets.emit("chat:message", data);
     })
+
     .on("chat:typing", (data) => {
       socket.broadcast.emit("chat:typing", data);
     })
+
     .on("user:colorChange", (data) => {
       socket.emit("user:colorChange", data);
       socket.broadcast.emit("broadcastColor", data);
     })
+
+    .on("user:status", (data) => {
+      socket.emit("user:status", data);
+      socket.broadcast.emit("broadcastStatus", data);
+    })
+
     .on("disconnect", () => {
       if (users[socket.id]) {
         socket.broadcast.emit("user:disconnect", users[socket.id]);
