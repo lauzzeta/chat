@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h1 class="chat-title">Chat</h1>
+        <div id="chat-window">
+            <div id="output"></div>
+            <div id="actions"></div>
+            <div id="users"></div>
+        </div>
+        <div class="input-container">
+            <input type="color" id="color">
+            <input type="text" id="message" placeholder="Type here" required autocomplete="off">
+            <button id="send">Send</button>
+        </div>
+    </div>  
+    <div class="users-container">
+        <h1 class="users-title">Online Users</h1>
+        <div class="users">
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script src="chat.js" charset="utf-8"></script>
+</body>
+</html>
