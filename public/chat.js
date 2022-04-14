@@ -59,6 +59,13 @@ userStatus.addEventListener("change", () => {
 });
 
 message.addEventListener("keypress", (e) => {
+  if (userStatus.value === "AFK") {
+    userStatus.value = "Online";
+    socket.emit("user:status", {
+      username,
+      status: userStatus.value,
+    });
+  }
   if (e.key !== "Enter") {
     socket.emit("chat:typing", username);
   } else {
@@ -69,18 +76,9 @@ message.addEventListener("keypress", (e) => {
 socket
 
   .on("chat:message", (data) => {
-    if (userStatus.value === "AFK") {
-      userStatus.value = "Online";
-      socket.emit("user:status", {
-        username,
-        status: userStatus.value,
-      });
-    }
     actions.innerHTML = "";
-    setTimeout(() => {
-      output.innerHTML += `<p class="messages"><strong style="color :${data.color}; ">${data.username}</strong>: ${data.message}</p>`;
-      scroll();
-    }, 1);
+    output.innerHTML += `<p class="messages"><strong style="color :${data.color}; ">${data.username}</strong>: ${data.message}</p>`;
+    scroll();
   })
 
   .on("user:online", (users) => {
