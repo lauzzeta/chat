@@ -69,9 +69,18 @@ message.addEventListener("keypress", (e) => {
 socket
 
   .on("chat:message", (data) => {
+    if (userStatus.value === "AFK") {
+      userStatus.value = "Online";
+      socket.emit("user:status", {
+        username,
+        status: userStatus.value,
+      });
+    }
     actions.innerHTML = "";
-    output.innerHTML += `<p class="messages"><strong style="color :${data.color}; ">${data.username}</strong>: ${data.message}</p>`;
-    scroll();
+    setTimeout(() => {
+      output.innerHTML += `<p class="messages"><strong style="color :${data.color}; ">${data.username}</strong>: ${data.message}</p>`;
+      scroll();
+    }, 100);
   })
 
   .on("user:online", (users) => {
