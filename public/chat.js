@@ -85,7 +85,6 @@ socket
     if (data) {
       output.innerHTML += `<p class="output-text">Connected as ${data}</p>`;
       scroll();
-      usersOn.innerHTML = "";
     }
   })
 
