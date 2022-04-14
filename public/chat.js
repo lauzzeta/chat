@@ -80,7 +80,7 @@ socket
     setTimeout(() => {
       output.innerHTML += `<p class="messages"><strong style="color :${data.color}; ">${data.username}</strong>: ${data.message}</p>`;
       scroll();
-    }, 100);
+    }, 1);
   })
 
   .on("user:online", (users) => {
