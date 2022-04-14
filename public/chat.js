@@ -94,7 +94,7 @@ socket
 
   .on("user:connect", (data) => {
     if (data) {
-      output.innerHTML += `<p class="output-text">${data} connected</p>`;
+      output.innerHTML += `<p class="output-text">${data} <strong style="color:#${colorArray[0]}; ">connected</strong></p>`;
       scroll();
       usersOn.innerHTML = "";
     }
@@ -102,7 +102,7 @@ socket
 
   .on("connected", (data) => {
     if (data) {
-      output.innerHTML += `<p class="output-text">Connected as ${data}</p>`;
+      output.innerHTML += `<p class="output-text"><strong style="color:#${colorArray[0]}; ">Connected</strong> as ${data}</p>`;
       scroll();
     }
   })
@@ -153,7 +153,7 @@ socket
 
   .on("user:disconnect", (data) => {
     if (data) {
-      output.innerHTML += `<p class="output-text">${data} disconnected</p>`;
+      output.innerHTML += `<p class="output-text">${data} <strong style="color:#${colorArray[2]}; ">disconnected</strong></p>`;
       scroll();
       usersOn.innerHTML = "";
     }
