@@ -36,6 +36,13 @@ window.addEventListener("load", () => {
   }
 });
 
+color.addEventListener("change", () => {
+  socket.emit("user:colorChange", {
+    username,
+    color: color.value,
+  });
+});
+
 btn.addEventListener("click", () => {
   sendMessage();
 });
@@ -84,6 +91,18 @@ socket
   .on("connected", (data) => {
     if (data) {
       output.innerHTML += `<p class="output-text">Connected as ${data}</p>`;
+      scroll();
+    }
+  })
+  .on("user:colorChange", (data) => {
+    if (data) {
+      output.innerHTML += `<p class="output-text">Succesfully changed username color to: ${data.color}</p>`;
+      scroll();
+    }
+  })
+  .on("broadcastColor", (data) => {
+    if (data) {
+      output.innerHTML += `<p class="output-text">${data.username} changed his username color to: ${data.color}</p>`;
       scroll();
     }
   })
