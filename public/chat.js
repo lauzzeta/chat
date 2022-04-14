@@ -96,13 +96,13 @@ socket
   })
   .on("user:colorChange", (data) => {
     if (data) {
-      output.innerHTML += `<p class="output-text">Succesfully changed username color to: ${data.color}</p>`;
+      output.innerHTML += `<p class="output-text">Succesfully changed your username color to: <strong style="color :${data.color}; ">${data.color}</strong></p>`;
       scroll();
     }
   })
   .on("broadcastColor", (data) => {
     if (data) {
-      output.innerHTML += `<p class="output-text">${data.username} changed his username color to: ${data.color}</p>`;
+      output.innerHTML += `<p class="output-text">${data.username} changed his username color to: <strong style="color :${data.color}; ">${data.color}</strong></p>`;
       scroll();
     }
   })
