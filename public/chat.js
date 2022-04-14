@@ -30,6 +30,7 @@ function sendMessage() {
 window.addEventListener("load", () => {
   if ((username = window.prompt("Username"))) {
     socket.emit("user:connect", username);
+    socket.emit("connected", username);
   } else {
     window.location.reload();
   }
@@ -76,6 +77,13 @@ socket
   .on("user:connect", (data) => {
     if (data) {
       output.innerHTML += `<p class="output-text">${data} connected</p>`;
+      scroll();
+      usersOn.innerHTML = "";
+    }
+  })
+  .on("connected", (data) => {
+    if (data) {
+      output.innerHTML += `<p class="output-text">Connected as ${data}</p>`;
       scroll();
       usersOn.innerHTML = "";
     }
