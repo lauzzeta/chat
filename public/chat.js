@@ -45,7 +45,7 @@ function updateUsers(data, users) {
       usersOn.innerHTML += `
       <div class="user">
       <img src="img/profile-default.png" alt="">
-      <div class="username" style='color:${e.color}'>${e.username}</div>
+      <div class="username" style='color:${e.color}'>${e.username}(${e.status})</div>
       </div>
       `;
     }
@@ -70,6 +70,7 @@ window.addEventListener("load", () => {
     socket.emit("user:connect", {
       username,
       color: color.value,
+      status: userStatus.value,
     });
   } else {
     window.location.reload();
@@ -163,18 +164,22 @@ socket
     }
   })
 
-  .on("myStatus", (data) => {
+  .on("myStatus", (data, users) => {
     if (data) {
       setStatus(data);
+      usersOn.innerHTML = "";
+      updateUsers(data.status, users);
       output.innerHTML += `<p class="output-text">Status changed to <strong style="color :#${statusColor}; ">${data.status}</strong></p>`;
       console.log(statusColor);
       scroll();
     }
   })
 
-  .on("broadcastStatus", (data) => {
+  .on("broadcastStatus", (data, users) => {
     if (data) {
       setStatus(data);
+      usersOn.innerHTML = "";
+      updateUsers(data, users);
       output.innerHTML += `<p class="output-text">${data.username} changed his status to <strong style="color :#${statusColor}; ">${data.status}</strong></p>`;
       console.log(statusColor);
       scroll();

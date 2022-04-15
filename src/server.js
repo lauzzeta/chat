@@ -25,14 +25,15 @@ io.on("connection", (socket) => {
     })
 
     .on("user:colorChange", (data) => {
-      users[socket.id] = data;
+      users[socket.id].color = data.color;
       socket.emit("colorChange", data, users);
       socket.broadcast.emit("broadcastColor", data, users);
     })
 
     .on("user:status", (data) => {
-      socket.emit("myStatus", data);
-      socket.broadcast.emit("broadcastStatus", data);
+      users[socket.id].status = data.status;
+      socket.emit("myStatus", data, users);
+      socket.broadcast.emit("broadcastStatus", data, users);
     })
 
     .on("disconnect", () => {
