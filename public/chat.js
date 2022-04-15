@@ -11,6 +11,8 @@ let message = document.getElementById("message"),
   usersOn = document.querySelector(".users"),
   statusColor = "";
 
+///////////////////////////////Functions///////////////////////////////
+
 function scroll() {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
@@ -30,10 +32,35 @@ function sendMessage() {
   }
 }
 
+function updateUsers(data, users) {
+  Object.values(users).forEach((e) => {
+    if (e === data.username) {
+      usersOn.innerHTML += `
+      <div class="user">
+      <img src="img/profile-default.png" alt="">
+      <div class="username" style='color:${e.color}'>${e.username}</div>
+      </div>
+      `;
+    } else {
+      usersOn.innerHTML += `
+      <div class="user">
+      <img src="img/profile-default.png" alt="">
+      <div class="username" style='color:${e.color}'>${e.username}</div>
+      </div>
+      `;
+    }
+  });
+}
+
+///////////////////////////////Events///////////////////////////////
+
 window.addEventListener("load", () => {
   if ((username = window.prompt("Username"))) {
     userStatus.value = "Online";
-    socket.emit("user:connect", username);
+    socket.emit("user:connect", {
+      username,
+      color: color.value,
+    });
   } else {
     window.location.reload();
   }
@@ -72,6 +99,8 @@ message.addEventListener("keypress", (e) => {
   }
 });
 
+///////////////////////////////Sockets///////////////////////////////
+
 socket
 
   .on("myConnection", (data) => {
@@ -89,15 +118,8 @@ socket
     }
   })
 
-  .on("updateUserList", (users) => {
-    Object.values(users).forEach((e) => {
-      usersOn.innerHTML += `
-        <div class="user">
-        <img src="img/profile-default.png" alt="">
-        <div class="username">${e}</div>
-        </div>
-        `;
-    });
+  .on("updateUserList", (data, users) => {
+    updateUsers(data, users);
   })
 
   .on("typing", (data) => {
@@ -113,15 +135,19 @@ socket
     scroll();
   })
 
-  .on("colorChange", (data) => {
+  .on("colorChange", (data, users) => {
+    usersOn.innerHTML = "";
     if (data) {
+      updateUsers(data, users);
       output.innerHTML += `<p class="output-text">Succesfully changed your username color to: <strong style="color :${data.color}; ">${data.color}</strong></p>`;
       scroll();
     }
   })
 
-  .on("broadcastColor", (data) => {
+  .on("broadcastColor", (data, users) => {
+    usersOn.innerHTML = "";
     if (data) {
+      updateUsers(data, users);
       output.innerHTML += `<p class="output-text">${data.username} changed his username color to: <strong style="color :${data.color}; ">${data.color}</strong></p>`;
       scroll();
     }

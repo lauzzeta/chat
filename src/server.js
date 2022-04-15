@@ -9,11 +9,11 @@ io.on("connection", (socket) => {
 
     .on("user:connect", (data) => {
       users[socket.id] = data;
-      socket.emit("myConnection", data);
-      socket.broadcast.emit("broadcastConnection", data);
-      io.sockets.emit("updateUserList", users);
-      console.log(`User ${users[socket.id]} connected`);
-      console.log(`Online users: ${Object.values(users)}`);
+      socket.emit("myConnection", users[socket.id].username);
+      socket.broadcast.emit("broadcastConnection", users[socket.id].username);
+      io.sockets.emit("updateUserList", data, users);
+      console.log(`User ${users[socket.id].username} connected`);
+      console.log(users);
     })
 
     .on("chat:message", (data) => {
@@ -25,8 +25,9 @@ io.on("connection", (socket) => {
     })
 
     .on("user:colorChange", (data) => {
-      socket.emit("colorChange", data);
-      socket.broadcast.emit("broadcastColor", data);
+      users[socket.id] = data;
+      socket.emit("colorChange", data, users);
+      socket.broadcast.emit("broadcastColor", data, users);
     })
 
     .on("user:status", (data) => {
