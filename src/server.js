@@ -24,7 +24,7 @@ io.on("connection", (socket) => {
       socket.broadcast.emit("typing", data);
     })
 
-    .on("user:colorChange", (data) => {s
+    .on("user:colorChange", (data) => {
       users[socket.id] = data;
       socket.emit("colorChange", data, users);
       socket.broadcast.emit("broadcastColor", data, users);
