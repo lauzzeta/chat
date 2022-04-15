@@ -9,9 +9,9 @@ io.on("connection", (socket) => {
 
     .on("user:connect", (data) => {
       users[socket.id] = data;
+      socket.emit("myConnection", data);
       socket.broadcast.emit("broadcastConnection", data);
       io.sockets.emit("updateUserList", users);
-      socket.emit("myConnection", data);
       console.log(`User ${users[socket.id]} connected`);
       console.log(`Online users: ${Object.values(users)}`);
     })
