@@ -74,13 +74,22 @@ message.addEventListener("keypress", (e) => {
 
 socket
 
-  .on("chat:message", (data) => {
-    actions.innerHTML = "";
-    output.innerHTML += `<p class="messages"><strong style="color :${data.color}; ">${data.username}</strong>: ${data.message}</p>`;
-    scroll();
+  .on("myConnection", (data) => {
+    if (data) {
+      output.innerHTML += `<p class="output-text"><strong style="color:#${colorArray[0]}; ">Connected</strong> as ${data}</p>`;
+      scroll();
+    }
   })
 
-  .on("user:online", (users) => {
+  .on("broadcastConnection", (data) => {
+    if (data) {
+      output.innerHTML += `<p class="output-text">${data} <strong style="color:#${colorArray[0]}; ">connected</strong></p>`;
+      scroll();
+      usersOn.innerHTML = "";
+    }
+  })
+
+  .on("updateUserList", (users) => {
     Object.values(users).forEach((e) => {
       usersOn.innerHTML += `
         <div class="user">
@@ -91,29 +100,20 @@ socket
     });
   })
 
-  .on("chat:typing", (data) => {
+  .on("typing", (data) => {
     if (data) {
       actions.innerHTML = `<p class="output-text">${data} is typing...</p>`;
       scroll();
     }
   })
 
-  .on("user:connect", (data) => {
-    if (data) {
-      output.innerHTML += `<p class="output-text">${data} <strong style="color:#${colorArray[0]}; ">connected</strong></p>`;
-      scroll();
-      usersOn.innerHTML = "";
-    }
+  .on("newMesssage", (data) => {
+    actions.innerHTML = "";
+    output.innerHTML += `<p class="messages"><strong style="color :${data.color}; ">${data.username}</strong>: ${data.message}</p>`;
+    scroll();
   })
 
-  .on("connected", (data) => {
-    if (data) {
-      output.innerHTML += `<p class="output-text"><strong style="color:#${colorArray[0]}; ">Connected</strong> as ${data}</p>`;
-      scroll();
-    }
-  })
-
-  .on("user:colorChange", (data) => {
+  .on("colorChange", (data) => {
     if (data) {
       output.innerHTML += `<p class="output-text">Succesfully changed your username color to: <strong style="color :${data.color}; ">${data.color}</strong></p>`;
       scroll();
@@ -127,7 +127,7 @@ socket
     }
   })
 
-  .on("user:status", (data) => {
+  .on("myStatus", (data) => {
     if (data) {
       if (data.status === "Online") {
         statusColor = colorArray[0];
@@ -157,7 +157,7 @@ socket
     }
   })
 
-  .on("user:disconnect", (data) => {
+  .on("broadcastDisconnection", (data) => {
     if (data) {
       output.innerHTML += `<p class="output-text">${data} <strong style="color:#${colorArray[2]}; ">disconnected</strong></p>`;
       scroll();
