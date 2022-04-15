@@ -8,13 +8,16 @@ let message = document.getElementById("message"),
   actions = document.getElementById("actions"),
   chatWindow = document.getElementById("chat-window"),
   userStatus = document.getElementById("status"),
+  check = document.getElementById("check"),
   usersOn = document.querySelector(".users"),
   statusColor = "";
 
 ///////////////////////////////Functions///////////////////////////////
 
 function scroll() {
-  chatWindow.scrollTop = chatWindow.scrollHeight;
+  if (check.checked) {
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+  }
 }
 
 function sendMessage() {
