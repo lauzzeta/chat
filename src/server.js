@@ -37,11 +37,14 @@ io.on("connection", (socket) => {
 
     .on("disconnect", () => {
       if (users[socket.id]) {
-        socket.broadcast.emit("broadcastDisconnection", users[socket.id]);
-        console.log(`User ${users[socket.id]} disconnected`);
+        socket.broadcast.emit(
+          "broadcastDisconnection",
+          users[socket.id].username
+        );
+        console.log(`User ${users[socket.id].username} disconnected`);
         delete users[socket.id];
         io.sockets.emit("updateUserList", users);
-        console.log(`Online users: ${Object.values(users)}`);
+        console.log(users);
       }
     });
 });
