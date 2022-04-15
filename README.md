@@ -1,1 +1,1 @@
-# Real time chat APP made with NodeJS, Express and Sockets.IO
+# Real time chat App made with NodeJS, Express and Sockets.IO
