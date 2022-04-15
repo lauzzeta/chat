@@ -52,6 +52,16 @@ function updateUsers(data, users) {
   });
 }
 
+function setStatus(data) {
+  if (data.status === "Online") {
+    statusColor = colorArray[0];
+  } else if (data.status === "AFK") {
+    statusColor = colorArray[1];
+  } else {
+    statusColor = colorArray[2];
+  }
+}
+
 ///////////////////////////////Events///////////////////////////////
 
 window.addEventListener("load", () => {
@@ -155,13 +165,7 @@ socket
 
   .on("myStatus", (data) => {
     if (data) {
-      if (data.status === "Online") {
-        statusColor = colorArray[0];
-      } else if (data.status === "AFK") {
-        statusColor = colorArray[1];
-      } else {
-        statusColor = colorArray[2];
-      }
+      setStatus(data);
       output.innerHTML += `<p class="output-text">Status changed to <strong style="color :#${statusColor}; ">${data.status}</strong></p>`;
       console.log(statusColor);
       scroll();
@@ -170,13 +174,7 @@ socket
 
   .on("broadcastStatus", (data) => {
     if (data) {
-      if (data.status === "Online") {
-        statusColor = colorArray[0];
-      } else if (data.status === "AFK") {
-        statusColor = colorArray[1];
-      } else {
-        statusColor = colorArray[2];
-      }
+      setStatus(data);
       output.innerHTML += `<p class="output-text">${data.username} changed his status to <strong style="color :#${statusColor}; ">${data.status}</strong></p>`;
       console.log(statusColor);
       scroll();
