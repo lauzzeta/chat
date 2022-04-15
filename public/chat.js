@@ -34,7 +34,6 @@ window.addEventListener("load", () => {
   if ((username = window.prompt("Username"))) {
     userStatus.value = "Online";
     socket.emit("user:connect", username);
-    socket.emit("connected", username);
   } else {
     window.location.reload();
   }
