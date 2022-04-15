@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
       socket.broadcast.emit("broadcastStatus", data, users);
     })
 
-    .on("disconnect", () => {
+    .on("disconnect", (data) => {
       if (users[socket.id]) {
         socket.broadcast.emit(
           "broadcastDisconnection",
@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
         );
         console.log(`User ${users[socket.id].username} disconnected`);
         delete users[socket.id];
-        io.sockets.emit("updateUserList", users);
+        io.sockets.emit("updateUserList", data, users);
         console.log(users);
       }
     });
