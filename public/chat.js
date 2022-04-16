@@ -48,7 +48,7 @@ function updateUsers(data, users) {
       usersOn.innerHTML += `
       <div class="user">
       <img src="img/profile-default.png" alt="">
-      <div class="username" style='color:${e.color}'>${e.username} (${e.status})</div>
+      <div class="username" style='color:${e.color}'>${e.username} <p class="status-text">(${e.status})</p></div>
       </div>
       `;
     }

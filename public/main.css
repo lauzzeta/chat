@@ -14,15 +14,55 @@ body{
     box-sizing: border-box;
     vertical-align: middle;
 }
-.chat-title {
+.header {
+    display: flex;
+    border-bottom: 1px solid gainsboro;
+    justify-content: space-between;
+}
+.header .chat-title {
     padding: 1rem 1.5rem;
     user-select: none;
     margin: 0;
-    border-bottom: 1px solid gainsboro;
+}
+.header .select-status {
+    align-self: center;
+}
+.header .select-status #status{
+    font-family: 'Poppins',sans-serif;
+    margin-right: 1.7rem;
+    border-radius: 5px;
+    outline: none;
+    padding: .5rem;
+    border: 1px solid gainsboro;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: .25s;
+    height: 50px;
+}
+#output {
+    height: 100%;
+}
+#status:hover {
+    background-color: rgba(104, 69, 160, 0.61);
+    color: white;
+}
+.label-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10px;
+}
+.label-div label {
+    min-width: 80px;
+    text-align: center;
+    font-size: 80%;
+    line-height: 18px;
 }
 #chat-window {
-    height: 69.5%;
-    overflow-y: scroll;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto
 }
 .users-title{
     display:flex;
@@ -34,8 +74,10 @@ body{
     width: 100%;
 }
 .chat-container {
+    display:flex;
+    flex-direction: column;
     background-color: white;
-    width: 190%;
+    width: 180%;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     height: 80vh;
@@ -52,6 +94,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: hidden;
 }
 .users {
     display:flex;
@@ -59,8 +102,13 @@ body{
     gap: 10px;
     width: 100%;
     overflow-y: auto;
+    word-break: break-all;
+
 }
-::-webkit-scrollbar {
+.users::-webkit-scrollbar {
+    height: 6px;
+}
+#chat-window::-webkit-scrollbar, .users::-webkit-scrollbar {
     width: 6px;
 }
 ::-webkit-scrollbar-thumb{
@@ -73,6 +121,7 @@ body{
     display: flex;
     align-items: center;
     border-bottom: 1px solid gainsboro;
+    box-sizing: content-box;
     padding-bottom: .5rem;
     padding-left: .5rem;
     user-select: none;
@@ -90,7 +139,17 @@ body{
 }
 .username {
     padding: 0 7px;
-    cursor: pointer;
+    user-select: none;
+    max-width: 100%;
+}
+.username .status-text {
+    display: inline;
+    font-style: italic;
+    padding: 0;
+    overflow-wrap: break-word;
+    margin: 0;
+    font-weight: 600;
+    color: grey;
 }
 .output-text {
     font-weight: 200;
@@ -99,17 +158,17 @@ body{
     user-select: none;
     margin:0;
     line-height: 17px;
+    overflow-wrap: break-word;
 }
 .output-text:first-child{
     margin-top: .4rem;
 }
 .input-container {
-    padding-top: 1rem;
+    padding-top: 7px;
     border-top: 1px solid gainsboro;
-    position: absolute;
     display:flex;
     align-items: center;
-    bottom: 15px;
+    bottom: 7px;
     width: 100%;
 }
 #message {
@@ -159,7 +218,7 @@ body{
 input[type="color"] {
     cursor: pointer;
 	-webkit-appearance: none;
-    width: 29px;
+    width: 30px;
     height: 30px;
 	border: none;
     margin-left: 1rem;
@@ -169,25 +228,31 @@ input[type="color"]::-webkit-color-swatch {
     border-radius: 50%;
     background-color: transparent;
 }
-@media (max-width: 960px) {
-    * {
-        font-size: .9rem;
+
+@media (max-width: 1500px) {
+    .titles{
+        font-size: 1.25rem;
+    }
+    .username {
+        font-size: .8rem;
     }
 }
-@media (max-width: 1360px) {
-    *{
+@media (max-width: 1220px) {
+    .output-text, .username {
         font-size: .95rem;
     }
 }
-@media (max-width:690px) {
+
+@media (max-width:1050px) {
+
     .user img {
         margin: 0;
+        width: 30px;
+        height: 30px;
     }
     .user:first-child {
+        max-width: 140px;
         padding: 0;
-    }
-    .user {
-        padding: .2rem;
     }
     ::-webkit-scrollbar {
         height: 6px;
@@ -197,13 +262,19 @@ input[type="color"]::-webkit-color-swatch {
         flex-direction: column;
     }
     .chat-container {
+        border-top-right-radius: 20px;
+        border-bottom-left-radius: 0;
         max-width: 90vw;
-        max-height: 60vh;
+        max-height: 80vh;
     }
     .users-container{
+        overflow: hidden;
         display: flex;
-        max-height: 100px;
+        max-height: 105px;
         width: 90vw;
+        border-bottom-left-radius: 20px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 20px;
     }
     .users-container .users-title {
         font-size: .9rem;
@@ -212,12 +283,39 @@ input[type="color"]::-webkit-color-swatch {
     .users {
         display: flex;
         flex-direction: row;
+        overflow-x: scroll;
     }
     .user {
+        width: 130px;
+        max-height: 72px;
+        max-width: 140px;
         border:none;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding-bottom: .2rem;
+    }
+    .username {
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    .username .status-text {
+        display: block;
+        margin: 0;
+    }
+}
+
+@media (max-width:500px) {
+    .label-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .label-div label {
+        text-align: center;
+        padding-top: 3px;
+        line-height: 10px;
     }
 }
