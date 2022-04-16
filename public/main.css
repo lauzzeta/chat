@@ -163,6 +163,10 @@ body{
 .output-text:first-child{
     margin-top: .4rem;
 }
+#actions p{
+    margin-top: 0;
+    margin-bottom: 3px;
+}
 .input-container {
     padding-top: 7px;
     border-top: 1px solid gainsboro;
