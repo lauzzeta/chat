@@ -319,30 +319,3 @@ input[type="color"]::-webkit-color-swatch {
         line-height: 10px;
     }
 }
-@media (max-height:500px){
-    .header {
-        height: 45px;
-    }
-    .header .chat-title {
-        font-size: .9rem;
-    }
-    .header .select-status #status {
-        font-size: .9rem;
-        height: fit-content;
-    }
-    #message {
-        height: 35px;
-    }
-    .input-container {
-        height: 35px;
-    }
-    .username {
-        font-size: .65rem;
-    }
-    .users-container{
-        height: 115px;
-    }
-    #send {
-        font-size: .9rem;
-    }
-}
