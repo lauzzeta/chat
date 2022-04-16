@@ -42,10 +42,6 @@ body{
 #output {
     height: 100%;
 }
-#status:hover {
-    background-color: rgba(104, 69, 160, 0.61);
-    color: white;
-}
 .label-div {
     display: flex;
     flex-direction: row;
@@ -115,7 +111,6 @@ body{
     background-color: rgb(28, 172, 88);
     border-radius: .5rem;
     border: 1px solid white;
-    /* AVERIGUAR COMO HACER QUE SCROLLBAR NO SUPERPOSICIONE LA BOX*/
 }
 .user {
     display: flex;
@@ -169,6 +164,7 @@ body{
 }
 .input-container {
     padding-top: 7px;
+    padding-bottom: 7px;
     border-top: 1px solid gainsboro;
     display:flex;
     align-items: center;
@@ -199,10 +195,10 @@ body{
     transition: .25s;
 }
 #status:hover {
-    background-color: rgba(104, 69, 160, 0.61);
+    background-color: rgb(107, 60, 218);
+    /* background-color: rgba(104, 69, 160, 0.61); */
     color: white;
 }
-
 #send {
     font-family: 'Poppins',sans-serif;
     margin-right: 1rem;
