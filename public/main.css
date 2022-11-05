@@ -216,7 +216,7 @@ body{
 }
 
 input[type="color"] {
-    cursor: pointer;
+    cursor: pointer; 
     width: 30px;
     height: 30px;
 	border: none;
